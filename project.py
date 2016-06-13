@@ -24,8 +24,7 @@ ls = []#students storage
 f = open("data.txt", "w")#check existance
 f.close()
 f = open("data.txt", "r+")
-data = f.read()#read data
-txt = data
+txt = f.read()#read data
 for x in txt.split(";")[:-1]:#load data
     st_name = re.search(r"\w+",x).group()
     age = re.search(r"\w+\:(?P<age>\d+)",x).group("age")
