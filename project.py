@@ -45,51 +45,54 @@ def search(nm):#search student in storage
 while True:
     print("1. New Student\n2. Add grade\n3. Remove Student\n4. Average grade\n5. List students\n6. List grades\n7. Exit")
     en = input("Select option: ")
-    if en == "1":
-        name = input("Enter student name: ")
-        age = input("Enter age: ")
-        ls.append(Student(name,age))
-        print("Student {} added.".format(name))
-    elif en == "2":
-        name = input("Enter student name: ")
-        subject = input("Enter subject: ")
-        grade = input("Enter grade: ")
-        search(name).set_grade(subject,grade)
-    elif en == "3":
-        name = input("Enter student name: ")
-        ls.remove(search(name))
-        print("Student removed.")
-    elif en == "4":
-        name = input("Enter student name: ")
-        print("The average grade is {}".format(search(name).Average()))
-    elif en == "5":
-        for st in ls:
-            print("{}, Age:{}".format(st.name,str(st.age)))
-    elif en == "6":
-        for st in ls:
-            print(st.name + ":")
-            gr = ""
-            for subs in st.grades.keys():
-                for x in st.grades[subs]:
-                    gr += x + ", "
-                print("{}: {}".format(subs,gr))
+    try:
+        if en == "1":
+            name = input("Enter student name: ")
+            age = input("Enter age: ")
+            ls.append(Student(name,age))
+            print("Student {} added.".format(name))
+        elif en == "2":
+            name = input("Enter student name: ")
+            subject = input("Enter subject: ")
+            grade = input("Enter grade: ")
+            search(name).set_grade(subject,grade)
+        elif en == "3":
+            name = input("Enter student name: ")
+            ls.remove(search(name))
+            print("Student removed.")
+        elif en == "4":
+            name = input("Enter student name: ")
+            print("The average grade is {}".format(search(name).Average()))
+        elif en == "5":
+            for st in ls:
+                print("{}, Age:{}".format(st.name,str(st.age)))
+        elif en == "6":
+            for st in ls:
+                print(st.name + ":")
                 gr = ""
-            print("\n")
-    elif en == "7":
-        f.close()
-        f = open("data.txt", "w")
-        f.truncate()#clear
-        txt = ""#save
-        for st in ls:
-            txt += st.name + ":" + str(st.age) + "*"
-            gr = ""
-            for sub in st.grades.keys():
-                for x in st.grades[sub]:
-                    gr += x + ", "
-                txt += sub + ":" + gr
-                txt += "|"
-            txt += ";"
-        f.write(txt)#save
-        f.close()
-        print("Goodbye")
-        break#exit()
+                for subs in st.grades.keys():
+                    for x in st.grades[subs]:
+                        gr += x + ", "
+                    print("{}: {}".format(subs,gr))
+                    gr = ""
+                print("\n")
+        elif en == "7":
+            f.close()
+            f = open("data.txt", "w")
+            f.truncate()#clear
+            txt = ""#save
+            for st in ls:
+                txt += st.name + ":" + str(st.age) + "*"
+                gr = ""
+                for sub in st.grades.keys():
+                    for x in st.grades[sub]:
+                        gr += x + ", "
+                    txt += sub + ":" + gr
+                    txt += "|"
+                txt += ";"
+            f.write(txt)#save
+            f.close()
+            print("Goodbye")
+            break#exit()
+        except:
+            print("Wrong data given")
